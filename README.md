@@ -10,7 +10,7 @@ Instructions and assignments for the containerization workshop.
 Note: If you're on OSX/Windows, you can sign up for the new and improved Docker Beta:
 https://beta.docker.com/
 
-# Usefull resources:
+# Useful resources:
 - Marathon
     - [Port mapping](https://mesosphere.github.io/marathon/docs/ports.html) (Use Bridge mode with `portMappings` until you understand more about ports)
     - [Persistance and volumes](https://mesosphere.github.io/marathon/docs/persistent-volumes.html)
