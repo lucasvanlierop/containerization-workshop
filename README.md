@@ -58,7 +58,93 @@ To get used to the tool first start with running a tiny shell script.
 Try the 'Hello Marathon: An Inline Shell Script' at: https://mesosphere.github.io/marathon/docs/application-basics.html
 
 ## Run a container task
-Now you've ran your first task it's time to start a container task.
+Now you've ran your first task it's time to start a container task. 
+
+Start by running an creating a task in the Marathon UI with id `nginx-test` and docker image `nginx`.
+After a while you see the nginx container has been started. 
+
+Now check the configuration, you'll see something like:
+
+```json
+{
+  "id": "/nginx-test",
+  "cmd": null,
+  "cpus": 1,
+  "mem": 128,
+  "disk": 0,
+  "instances": 1,
+  "container": {
+    "type": "DOCKER",
+    "volumes": [],
+    "docker": {
+      "image": "nginx",
+      "network": "HOST",
+      "privileged": false,
+      "parameters": [],
+      "forcePullImage": false
+    }
+  },
+  "portDefinitions": [
+    {
+      "port": 10000,
+      "protocol": "tcp",
+      "labels": {}
+    }
+  ]
+}
+```
+
+No it's time to check if it works: Go to the instances tab and check the id and port. 
+You'll a like to the application, something like: `172.17.0.3:10000`. 
+
+When you try to open this link you'll notice it doesn't work.
+
+Why doesn't work?, well Nginx is running on port 80 while the container has been given a random port, `10000` in this case.
+
+This can be fixed by mapping the port on the host to the port in the container with a `portMapping`.
+Note the network mode has to be changed from `HOST` to `BRIDGE` too.
+
+Go to the configuration editor in JSON mode and change the config to the following:
+
+```json
+{
+  "id": "/nginx-test",
+  "cmd": null,
+  "cpus": 1,
+  "mem": 128,
+  "disk": 0,
+  "instances": 1,
+  "container": {
+    "type": "DOCKER",
+    "volumes": [],
+    "docker": {
+      "image": "nginx",
+      "network": "BRIDGE",
+      "portMappings": [
+        {
+          "containerPort": 80,
+          "hostPort": 10000,
+          "servicePort": 10000,
+          "protocol": "tcp",
+          "labels": {}
+        }
+      ],
+      "privileged": false,
+      "parameters": [],
+      "forcePullImage": false
+    }
+  },
+  "portDefinitions": [
+    {
+      "port": 10000,
+      "protocol": "tcp",
+      "labels": {}
+    }
+  ]
+}
+```
+
+Now click the link in the instances tab again and you should see the default Nginx page
 
 ## Scale a task
 So far you have created just one instance but if that's not enough to handle all requests it's possible to scale to multiple instance.
