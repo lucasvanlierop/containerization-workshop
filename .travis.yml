@@ -1,9 +1,9 @@
 services:
   - docker
 
-before_install:
-  - sudo apt-get -qq update
-  - sudo apt-get install -y make
+before_script:
+  # Ancient make binary at TravisCI doesn't support indentation with spaces
+  - unexpand -t 4 Makefile > Makefile
 
 script:
   - make -v
