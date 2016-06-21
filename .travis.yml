@@ -2,6 +2,7 @@ services:
   - docker
 
 script:
+  - make -v
   - make test
 
 after_failure:
