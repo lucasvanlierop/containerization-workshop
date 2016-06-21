@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/lucasvanlierop/containerization-workshop.svg?branch=master)](https://travis-ci.org/lucasvanlierop/containerization-workshop)
+
 Instructions and assignments for the containerization workshop.
 
 # Requirements:

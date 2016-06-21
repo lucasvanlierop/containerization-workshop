@@ -1,0 +1,16 @@
+services:
+  - docker
+
+script:
+  - make test
+
+after_failure:
+  - docker logs lucasvanlierop/containerization-workshop
+
+after_succes:
+  - docker login --email=$DOCKER_EMAIL --username=$DOCKER_USERNAME --password=$DOCKER_PASSWORD
+  - if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then docker push lucasvanlierop/containerization-workshop; fi
+
+branches:
+  only:
+    - master
