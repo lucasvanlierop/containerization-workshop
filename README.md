@@ -185,7 +185,8 @@ Add a HTTP/TCP/Command check to your own application
 https://mesosphere.github.io/marathon/docs/health-checks.html
 
 ## Build, test and store and image of your application in CI
-You can use your favorite CI solution for this This example will use TravisCI
+You can use your favorite CI solution for this This example will use TravisCI.
+Also this example uses plan `make` but feel free to use your favorite task runner, build tools etc.
 
 what needs to be done is:
 - Build the application
