@@ -44,14 +44,26 @@ http://172.17.0.2/service/marathon/ui/#/apps
 
 ## Reinstalling DC/OS
 If either the install did not succeed or got broken somehow. It's possible to clean up and reinstall:
-Further information: https://github.com/dcos/dcos-docker#troubleshooting
+The most reliable way I found so far was:
+
 
 ```
 #dcos-docker
+
+# remove master (should be stopped or killed first)
+docker kill dcos-docker-master1
+docker rm dcos-docker-master1
+
+# restart docker, just to be sure nothing is running (dcos uses docker in docker...)
+sudo service docker restart
+
+# Build and install docker again
 sudo make clean
 make all
 ```
-    
+
+Further information: https://github.com/dcos/dcos-docker#troubleshooting
+
 # Assignments
 
 ## Run a test script task
