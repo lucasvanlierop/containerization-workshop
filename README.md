@@ -203,6 +203,8 @@ what needs to be done is:
 
 See [`.travis.yml`](travis.yml) for a basic setup
 
+Note you have to configure all the `$DOCKER_*` credentials in your Travis repo under: *More options -> Settings -> Environment Variables*. 
+
 ## Pass configuration as environment variables
 Containers should be unaware of their environment.
 Most applications however need configuration.
