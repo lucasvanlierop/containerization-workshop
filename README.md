@@ -120,43 +120,7 @@ Note the network mode has to be changed from `HOST` to `BRIDGE` too.
 
 Go to the configuration editor in JSON mode and change the config to the following:
 
-```json
-{
-  "id": "/nginx-test",
-  "cmd": null,
-  "cpus": 1,
-  "mem": 128,
-  "disk": 0,
-  "instances": 1,
-  "container": {
-    "type": "DOCKER",
-    "volumes": [],
-    "docker": {
-      "image": "nginx",
-      "network": "BRIDGE",
-      "portMappings": [
-        {
-          "containerPort": 80,
-          "hostPort": 10000,
-          "servicePort": 10000,
-          "protocol": "tcp",
-          "labels": {}
-        }
-      ],
-      "privileged": false,
-      "parameters": [],
-      "forcePullImage": false
-    }
-  },
-  "portDefinitions": [
-    {
-      "port": 10000,
-      "protocol": "tcp",
-      "labels": {}
-    }
-  ]
-}
-```
+[nginx-with-ports-configured.json](nginx-with-ports-configured.json)
 
 Now click the link in the instances tab again and you should see the default Nginx page
 
@@ -217,14 +181,15 @@ Deploy your app with config pass as environment variable.
 This can be achieved by running bin/console cache:warmup as command when starting the container.
 
 ## Deploy remotely
-Using the UI to create applications fine for playing around.
-If you want to automate deployment you can use the
-[Marathon API](https://mesosphere.github.io/marathon/docs/rest-api.html).
+While the UI is nice for playing around. The real work can be done using the [DC/OS client](https://docs.mesosphere.com/1.7/usage/cli/).
+Follow the instructions in the [CLI client shipped with this project](bin/dcos).
 
-Alternatively you can install the [DC/OS client](https://docs.mesosphere.com/1.7/usage/cli/).
+The DC/OS client also provides access to Marathon, to see which commands are possible, type: `./bin/dcos marathon`.
 
-Deploy remotely, you can use copy the configuration from the marathon configuration editor in JSON mode as a start.
+Example add Nginx:
+`./bin/dcos marathon app add examples/nginx-with-ports-configured.json`
 
+Now deploy remotely using the CLI. you can use the configuration from the marathon configuration editor in JSON mode as a start. 
 ## Setup central logging
 Each container potentially generates a lot of log information.
 For obvious reasons it's good to aggregate all these logs in one place instead of scattered over numerous containers. 

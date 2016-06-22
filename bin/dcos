@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+# Usage:
+
+# Configure DCOS url:
+# ./bin/dcos config set core.dcos_url http://172.17.0.2/
+#
+# Authenticate:
+# ./bin/dcos auth login
+
+docker run -it --rm \
+        -v $HOME/.dcos:/root/.dcos \
+        -v $(pwd):/root/apps \
+        -w /root/apps \
+        jess/dcos-cli "$@"
