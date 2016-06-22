@@ -5,8 +5,8 @@
 
 SHELL=/bin/bash
 
-CONTAINER_TAG=lucasvanlierop/containerization-workshop
-CONTAINER_NAME=lucasvanlierop-containerization-workshop:latest
+CONTAINER_TAG=lucasvanlierop/containerization-workshop:latest
+CONTAINER_NAME=lucasvanlierop-containerization-workshop
 
 all: build_container_image
 
