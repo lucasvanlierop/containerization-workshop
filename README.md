@@ -177,8 +177,9 @@ One solution for this is to pass config as [environment variables](https://docs.
 
 - Deploy your app with config pass as environment variable.
 
-*Note: for For symfony users: it's possible to generate a `parameters.yml` file bases on the passed [environment variables](http://symfony.com/doc/current/cookbook/configuration/external_parameters.html#environment-variables).
-This can be achieved by running bin/console cache:warmup as command when starting the container.
+*Note: for For symfony users: it's possible to generate config cache based on the passed [environment variables](http://symfony.com/doc/current/cookbook/configuration/external_parameters.html#environment-variables).
+These variables replace the `parameters.yml` file you might be used to.
+This can be achieved by running bin/console cache:warmup as commands when starting the container.*
 
 ## Deploy remotely
 While the UI is nice for playing around. The real work can be done using the [DC/OS client](https://docs.mesosphere.com/1.7/usage/cli/).
