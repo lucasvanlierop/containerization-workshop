@@ -118,7 +118,7 @@ Why doesn't it work?, well Nginx is running on port 80 while the container has b
 This can be fixed by mapping the port on the host to the port in the container with a `portMapping`.
 Note the network mode has to be changed from `HOST` to `BRIDGE` too.
 
-- Go to the configuration editor in JSON mode and change the config to the following [nginx-with-ports-configured.json](nginx-with-ports-configured.json)
+- Go to the configuration editor in JSON mode and change the config to the following [nginx-with-ports-configured.json](./examples/nginx-with-ports-configured.json)
 
 - Now click the link in the instances tab again and you should see the default Nginx page
 
