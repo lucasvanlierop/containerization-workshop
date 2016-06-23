@@ -201,7 +201,7 @@ In Docker it's common to send all logs to stdOut from where it can be aggreated 
 
 This can be done in multiple ways (ow really?) the easiest solution for now is to setup
 
-https://github.com/gliderlabs/logspou    
+https://github.com/gliderlabs/logspout    
 https://docs.mesosphere.com/administration/logging/elk/? (needs a lot of RAM!)
 
 - Setup your own a central logging solution
