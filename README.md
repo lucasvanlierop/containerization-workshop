@@ -166,7 +166,7 @@ what needs to be done is:
     - Login to Docker Hub in CI
     - Push Image to Docker Hub 
 
-See [`.travis.yml`](travis.yml) for a basic setup
+See [`.travis.yml`](.travis.yml) for a basic setup
 
 Note you have to configure all the `$DOCKER_*` credentials in your Travis repo under: *More options -> Settings -> Environment Variables*. 
 
