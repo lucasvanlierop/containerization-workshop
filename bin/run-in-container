@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+#
+# Runs commands in container
+
+# Note this expects a running container
+
+USER_ID=`id -u $(whoami)`
+docker exec -u $USER_ID lucasvanlierop-containerization-workshop "$@"

@@ -21,6 +21,8 @@ start_container: build_container_image
     -t ${CONTAINER_TAG}
 
 start_dev_container: build_container_image
+    docker kill ${CONTAINER_NAME};
+    docker rm ${CONTAINER_NAME}
     docker run \
     -v `pwd`/web:/var/www/html \
     -d \

@@ -22,8 +22,6 @@ https://beta.docker.com/
     - [Concepts](https://docs.mesosphere.com/1.7/overview/concepts/)
     - [Roadmap](https://docs.mesosphere.com/1.7/overview/roadmap/)
 
-
-
 # Setup
 ## Install DC/OS
 ```
@@ -34,18 +32,18 @@ make all
 ```    
 
 ## Test if DC/OS works
-Open http://172.17.0.2/ (or the IP the installer told you). Note: When DC/OS tells you to go to your browser it might not be ready yet, hang on!
+- Open http://172.17.0.2/ (or the IP the installer told you). Note: When DC/OS tells you to go to your browser it might not be ready yet, hang on!
+
 You can add the ip to you /etc/hosts if you like.
 
 ## Test if Marathon works
-http://172.17.0.2/service/marathon/ui/#/apps
+- Open http://172.17.0.2/service/marathon/ui/#/apps
 
 # Troubleshooting
 
 ## Reinstalling DC/OS
 If either the install did not succeed or got broken somehow. It's possible to clean up and reinstall:
 The most reliable way I found so far was:
-
 
 ```
 #dcos-docker
@@ -69,15 +67,16 @@ Further information: https://github.com/dcos/dcos-docker#troubleshooting
 ## Run a test script task
 While this workshop is about containers, Marathon can run all kinds of tasks.
 To get used to the tool first start with running a tiny shell script.
-Try the 'Hello Marathon: An Inline Shell Script' at: https://mesosphere.github.io/marathon/docs/application-basics.html
+
+- Try the 'Hello Marathon: An Inline Shell Script' at: https://mesosphere.github.io/marathon/docs/application-basics.html
 
 ## Run a container task
 Now you've ran your first task it's time to start a container task. 
 
-Start by running an creating a task in the Marathon UI with id `nginx-test` and docker image `nginx`.
+- Start by running an creating a task in the Marathon UI with id `nginx-test` and docker image `nginx`.
 After a while you see the nginx container has been started. 
 
-Now check the configuration, you'll see something like:
+- Check the configuration, you'll see something like:
 
 ```json
 {
@@ -108,45 +107,46 @@ Now check the configuration, you'll see something like:
 }
 ```
 
-No it's time to check if it works: Go to the instances tab and check the id and port. 
+Now it's time to check if it works: 
+- Go to the instances tab and check the id and port. 
 You'll a like to the application, something like: `172.17.0.3:10000`. 
 
 When you try to open this link you'll notice it doesn't work.
 
-Why doesn't work?, well Nginx is running on port 80 while the container has been given a random port, `10000` in this case.
+Why doesn't it work?, well Nginx is running on port 80 while the container has been given a random port, `10000` in this case.
 
 This can be fixed by mapping the port on the host to the port in the container with a `portMapping`.
 Note the network mode has to be changed from `HOST` to `BRIDGE` too.
 
-Go to the configuration editor in JSON mode and change the config to the following:
+- Go to the configuration editor in JSON mode and change the config to the following [nginx-with-ports-configured.json](nginx-with-ports-configured.json)
 
-[nginx-with-ports-configured.json](nginx-with-ports-configured.json)
-
-Now click the link in the instances tab again and you should see the default Nginx page
+- Now click the link in the instances tab again and you should see the default Nginx page
 
 ## Scale a task
 So far you have created just one instance but if that's not enough to handle all requests it's possible to scale to multiple instance.
-Try it with your own application using the UI.
 
-*Note that Marathon is responsible for scaling tasks and DC/OS for scaling resources*
+- Try it with your own application using the UI.
+
+*Note that Marathon is responsible for scaling tasks while DC/OS is responsible for scaling resources*
 
 ## Add a readyness check
 Marathon can check if your application is fully ready.
 
-Add a readyness check for yopur application.
+- Add a readyness check for yopur application.
 https://mesosphere.github.io/marathon/docs/readiness-checks.html
 
 ## Add a health check
 Marathon likes to know if your application is healthy and can check this on a regular basis.
 
+- Add a HTTP/TCP/Command check to your own application 
+https://mesosphere.github.io/marathon/docs/health-checks.html
+
 ## Build your own small containerized application
 If you have grasped the basics you can now Dockerize your own application.
 - Create your own repo
 - Create a small project
-- Create a Dockerfile according to the [Best Practices](https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/)
-
-Add a HTTP/TCP/Command check to your own application 
-https://mesosphere.github.io/marathon/docs/health-checks.html
+- Make sure it's require's at least one configuration value
+- Create a Dockerfile according to the [Best Practices](https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/) 
 
 ## Build, test and store and image of your application in CI
 You can use your favorite CI solution for this This example will use TravisCI.
@@ -189,7 +189,10 @@ The DC/OS client also provides access to Marathon, to see which commands are pos
 Example add Nginx:
 `./bin/dcos marathon app add examples/nginx-with-ports-configured.json`
 
-Now deploy remotely using the CLI. you can use the configuration from the marathon configuration editor in JSON mode as a start. 
+- Now deploy remotely using the CLI. you can use the app configuration from the app marathon configuration editor in JSON mode as a start. 
+
+# Bonus assignments
+
 ## Setup central logging
 Each container potentially generates a lot of log information.
 For obvious reasons it's good to aggregate all these logs in one place instead of scattered over numerous containers. 
@@ -197,31 +200,38 @@ In Docker it's common to send all logs to stdOut from where it can be aggreated 
 
 This can be done in multiple ways (ow really?) the easiest solution for now is to setup
 
-https://github.com/gliderlabs/logspout and/ore    
-?https://docs.mesosphere.com/administration/logging/elk/? (needs a lot of RAM!)
+https://github.com/gliderlabs/logspou    
+https://docs.mesosphere.com/administration/logging/elk/? (needs a lot of RAM!)
 
-Setup your own a central logging solution using
-
-# Bonus assignments
+- Setup your own a central logging solution
 
 ## Build a full fledged application
 Hello World is very nice but now it's time to build a proper application.
-Create an application using your favorite language/framework.
+Create an application using your favorite language/framework like Symfony.
 
 If your project consists of multiple containers you can manage them as a group.
-Groups can be deployed, scaled etc. as a whole. If you are using the Marathon API make sure to use the [groups endpoint](https://mesosphere.github.io/marathon/docs/rest-api.html#groups)
-https://mesosphere.github.io/marathon/docs/application-groups.html
+Groups can be deployed, scaled etc. as a whole.  Marathon has a [groups endpoint](https://mesosphere.github.io/marathon/docs/rest-api.html#groups)
+https://mesosphere.github.io/marathon/docs/application-groups.html which can also be used via the DC/OS cli.
 
 ## Make your image smaller
-- ?Use busybox?
-- [Squash your images](https://www.ianlewis.org/en/creating-smaller-docker-images-part2)
+- Use [Alpine linux](https://hub.docker.com/_/alpine/) as base instead of Debian 
 - [Make as few layers as possible](https://www.ianlewis.org/en/creating-smaller-docker-images) 
+- [Squash your images](https://www.ianlewis.org/en/creating-smaller-docker-images-part2)
 
 [Useful information](https://www.iron.io/microcontainers-tiny-portable-containers/)
 
+## Add more pre build tests to Travis
+You're probably experienced with unit testing, code inspections etc. 
+All these kind of tests need the same runtime the code itself does. 
+So why install that on your CI server when it's already in the container?
+
+- Start the development container on the CI: `make start_dev_container`
+- Run a command like: `./bin/run-in-container ls`
+
 ## Add more post build tests to Travis
-While smoke test only verifies if the application starts at all. 
-You could try and add more tests using your favorite tool (e.g. [Behat](http://docs.behat.org/en/v3.0/))
+While smoke test just verifies does anything at all, normally want to run more tests.
+
+- Add some more tests using your favorite tool (e.g. [Behat](http://docs.behat.org/en/v3.0/))
 
 ## Pull an image from a private repository
 While many open source images can be used, business often have there own private images.
@@ -233,11 +243,22 @@ https://mesosphere.github.io/marathon/docs/native-docker-private-registry.html
 Deploy multiple versions of the same application
 https://mesosphere.github.io/marathon/docs/blue-green-deploy.html
 
-## Deploy using constraints
-Deploy application only to host matching a given constraint
-https://mesosphere.github.io/marathon/docs/constraints.html
-
 ## Act on events
 Marathon emits events for everything that happens in. 
 Think of how you could use that. For example to notify when a succesful deploy happened.
 https://mesosphere.github.io/marathon/docs/event-bus.html
+
+## Super bonus assignments
+
+## Setup service discovery
+Service discovery on a local installation is just plain hard, I'll see if we can get it working today. 
+It involves adding a public node to 
+
+https://dcos.io/docs/1.7/administration/installing/custom/create-public-agent/
+https://mesosphere.github.io/marathon/docs/service-discovery-load-balancing.html
+
+- Build another application and let them talk to each other.
+
+## Deploy using constraints
+Deploy application only to host matching a given constraint
+https://mesosphere.github.io/marathon/docs/constraints.html
