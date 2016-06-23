@@ -264,3 +264,8 @@ https://mesosphere.github.io/marathon/docs/service-discovery-load-balancing.html
 ## Deploy using constraints
 - Deploy application only to host matching a given constraint
 https://mesosphere.github.io/marathon/docs/constraints.html
+
+# Want to learn more on Docker / Mesos / Container-all-the-things
+- [A list of people to follow](./PEOPLETOFOLLOW.md)
+- [A curated list of Docker resources and projects](https://github.com/veggiemonk/awesome-docker)
+- [The Docker Randstad meetup group](http://www.meetup.com/docker-randstad/)
