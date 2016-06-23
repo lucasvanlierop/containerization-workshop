@@ -175,7 +175,7 @@ Containers should be unaware of their environment.
 Most applications however need configuration.
 One solution for this is to pass config as [environment variables](https://docs.docker.com/engine/reference/run/#env-environment-variables)
 
-Deploy your app with config pass as environment variable.
+- Deploy your app with config pass as environment variable.
 
 *Note: for For symfony users: it's possible to generate a `parameters.yml` file bases on the passed [environment variables](http://symfony.com/doc/current/cookbook/configuration/external_parameters.html#environment-variables).
 This can be achieved by running bin/console cache:warmup as command when starting the container.
@@ -236,11 +236,11 @@ While smoke test just verifies does anything at all, normally want to run more t
 ## Pull an image from a private repository
 While many open source images can be used, business often have there own private images.
 
-Configure Marathon authentication for Docker Hub. 
+- Configure Marathon authentication for Docker Hub. 
 https://mesosphere.github.io/marathon/docs/native-docker-private-registry.html
 
 ## Do a blue/green deployment
-Deploy multiple versions of the same application
+- Deploy multiple versions of the same application
 https://mesosphere.github.io/marathon/docs/blue-green-deploy.html
 
 ## Act on events
@@ -254,11 +254,11 @@ https://mesosphere.github.io/marathon/docs/event-bus.html
 Service discovery on a local installation is just plain hard, I'll see if we can get it working today. 
 It involves adding a public node to 
 
+- Build another application and let them talk to each other.
+
 https://dcos.io/docs/1.7/administration/installing/custom/create-public-agent/
 https://mesosphere.github.io/marathon/docs/service-discovery-load-balancing.html
 
-- Build another application and let them talk to each other.
-
 ## Deploy using constraints
-Deploy application only to host matching a given constraint
+- Deploy application only to host matching a given constraint
 https://mesosphere.github.io/marathon/docs/constraints.html
