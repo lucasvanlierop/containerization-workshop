@@ -119,6 +119,7 @@ This can be fixed by mapping the port on the host to the port in the container w
 Note the network mode has to be changed from `HOST` to `BRIDGE` too.
 
 - Go to the configuration editor in JSON mode and change the config to the following [nginx-with-ports-configured.json](examples/nginx-with-ports-configured.json)
+  (or edit the configuration via the [Marathon GUI](http://172.17.0.2/service/marathon/ui/) and change the network (first) and add the container port `80` )
 
 - Now click the link in the instances tab again and you should see the default Nginx page
 
@@ -263,3 +264,8 @@ https://mesosphere.github.io/marathon/docs/service-discovery-load-balancing.html
 ## Deploy using constraints
 - Deploy application only to host matching a given constraint
 https://mesosphere.github.io/marathon/docs/constraints.html
+
+# Want to learn more on Docker / Mesos / Container-all-the-things
+- [A list of people to follow](./PEOPLETOFOLLOW.md)
+- [A curated list of Docker resources and projects](https://github.com/veggiemonk/awesome-docker)
+- [The Docker Randstad meetup group](http://www.meetup.com/docker-randstad/)
